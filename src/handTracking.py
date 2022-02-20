@@ -30,7 +30,7 @@ class HandTracking:
 
         return img
 
-    def positionPoint(self, img, hand=0, point=0, draw=True):
+    def positionPoint(self, img, hand=0, point=0, draw=True, andPoint=False):
         listcoord = []
         pointcoord = []
         if self.detecting.multi_hand_landmarks:
@@ -45,9 +45,13 @@ class HandTracking:
                     cv2.circle(img, (mat_x, mat_y), 7, (244, 200, 0), cv2.FILLED)
                 if mat == point:
                     pointcoord.append([mat_x, mat_y])
-                    cv2.circle(img, (mat_x, mat_y), 7, (245, 200, 0), cv2.FILLED)
+                    if draw:
+                        cv2.circle(img, (mat_x, mat_y), 7, (245, 200, 0), cv2.FILLED)
 
-        return listcoord, pointcoord
+        if andPoint:
+            return listcoord, pointcoord
+        else:
+            return listcoord
 
 
 def show(img, title="my capture video"):
